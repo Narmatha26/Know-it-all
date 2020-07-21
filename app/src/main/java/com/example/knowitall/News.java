@@ -4,13 +4,13 @@ public class News {
     private String mTopic;
     private String mNews;
     private String mDate;
-    private String mTime;
+    private String mUrl;
 
-    public News(String topic, String news, String date, String time){
+    public News(String topic, String news, String date, String url){
         mTopic = topic;
         mNews = news;
         mDate = date;
-        mTime = time;
+        mUrl = url;
     }
 
     public String getTopic(){
@@ -25,7 +25,8 @@ public class News {
         return mDate;
     }
 
-    public String getTime(){
-        return mTime;
+    public String getUrl() {
+        return mUrl;
     }
+
 }

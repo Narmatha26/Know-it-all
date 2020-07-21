@@ -1,20 +1,18 @@
 package com.example.knowitall;
 
 import android.content.Context;
-import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import java.util.ArrayList;
-import java.util.Date;
+
 
 public class NewsAdapter extends ArrayAdapter<News> {
+    private static final String DATE_TIME_SEPARATOR = "T";
     public NewsAdapter(@NonNull Context context, @NonNull ArrayList<News> newsArrayList) {
         super(context, 0, newsArrayList);
     }
@@ -36,11 +34,21 @@ public class NewsAdapter extends ArrayAdapter<News> {
         TextView newsTextView = listItemView.findViewById(R.id.actualNews);
         newsTextView.setText(currentNews.getNews());
 
+        String originalDateTime = currentNews.getDate();
+        String date = null;
+        String time = null;
+        if(originalDateTime.contains(DATE_TIME_SEPARATOR)){
+            String[] parts = originalDateTime.split(DATE_TIME_SEPARATOR);
+            date = parts[0];
+            time = parts[1];
+            time = time.replace("Z", " ");
+        }
+
         TextView dateTextView = listItemView.findViewById(R.id.date);
-        dateTextView.setText(currentNews.getDate());
+        dateTextView.setText(date);
 
         TextView timeTextView = listItemView.findViewById(R.id.time);
-        timeTextView.setText(currentNews.getTime());
+        timeTextView.setText(time);
 
         return listItemView;
     }
